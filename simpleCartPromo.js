@@ -50,10 +50,10 @@ jQuery("#promoSub").click(function Discount() {
                 var newPrice = itemPrice - theDiscount;
                 simpleCart.items()[i].set("price", newPrice)
             }
+            simpleCart.update();
             //hides the promo box so people cannot add the same promo over and over
             jQuery('#promoCodeDiv').hide();
             
         }
     });
 });
-simpleCart.update();
