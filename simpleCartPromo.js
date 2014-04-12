@@ -23,7 +23,9 @@ $("#promoSub").click(function Discount() {
     //Interact with PHP file and check for valid Promo Code
     jQuery.post("discount.php", { code: jQuery('#code').val() } , function(data) {
         console.log(jQuery('#code').val());
-        if (data=="") { console.log("Wrong Code"); }
+        if (data=="") { 
+            console.log("Wrong Code"); 
+        }
         else {
             //create our cookie function if promo code is valid
             function createCookie(name,value,days) {
@@ -31,20 +33,23 @@ $("#promoSub").click(function Discount() {
                     var date = new Date();
                     date.setTime(date.getTime()+(days*24*60*60*1000));
                     var expires = "; expires="+date.toGMTString();
+                } else{
+                    var expires = "";
+                    document.cookie = name+"="+value+expires+"; path=/";
                 }
-                else var expires = "";
-                document.cookie = name+"="+value+expires+"; path=/";
+                    //create cookie for 1 day
+                    createCookie("promo","true",1);
+                    var y = (data/100);
+                for(var i=0; i<simpleCart.items().length; i++){
+                        var itemPrice = simpleCart.items()[i].price();
+                        var theDiscount = itemPrice * y;
+                        var newPrice = itemPrice - theDiscount;
+                        simpleCart.items()[i].set("price", newPrice)
+                }
+                //hides the promo box so people cannot add the same promo over and over
+                $('#promoCodeDiv').hide();
             }
-            //create cookie for 1 day
-            createCookie("promo","true",1);
-            var y = (data/100);
-            for(var i=0; i<simpleCart.items().length; i++){
-	            var itemPrice = simpleCart.items()[i].price();
-	            var theDiscount = itemPrice * y;
-	            var newPrice = itemPrice - theDiscount;
-	            simpleCart.items()[i].set("price", newPrice)
-            }
-            //hides the promo box so people cannot add the same promo over and over
-            $('#promoCodeDiv').hide();
-    } 
+        }
+    });
+});
 simpleCart.update();
