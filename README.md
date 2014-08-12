@@ -9,8 +9,7 @@ and add the discount to each of the items and then update the cart. The script c
 is correct. There is a script to check if the cookie exists and if it does, the promo code box is hidden to avoid 
 the same promo code being submitted over and over. The cookie lasts for a day. 
 
-This may not be the most elegant way to do it and has many security flaws, but it is better than any other 
-solution that I could find.
+Like any front end shopping cart solutions, SimpleCart is open to security vulnerabilities.
 
 Feel free to expand on this script and make it better.
 Feel free to email me about it at seanpapanikolas@gmail.com
